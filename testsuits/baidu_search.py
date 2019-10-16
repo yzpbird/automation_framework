@@ -15,7 +15,8 @@ from pageobjects.baidu_homepage import HomePage
 
 class BaiduSearch(unittest.TestCase):
 
-    def setUp(self):
+    @classmethod
+    def setUpClass(self):
         """
         测试固件的setUp()的代码，主要是测试的前提准备工作
         :return:
@@ -23,7 +24,8 @@ class BaiduSearch(unittest.TestCase):
         browse = BrowserEngine(self)
         self.driver = browse.open_browser(self)
 
-    def tearDown(self):
+    @classmethod
+    def tearDownClass(self):
         """
         测试结束后的操作，这里基本上都是关闭浏览器
         :return:
@@ -46,6 +48,14 @@ class BaiduSearch(unittest.TestCase):
             print('Test Pass.')
         except Exception as e:
             print('Test Fail.', format(e))
+
+
+    def test_search2(self):
+        homePage = HomePage(self.driver)
+        homePage.type_search('python')
+        homePage.send_submit_btn()
+        time.sleep(2)
+        homePage.get_windows_img()
 
 
 if __name__ == '__main__':
